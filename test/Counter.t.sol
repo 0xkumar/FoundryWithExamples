@@ -9,16 +9,39 @@ contract CounterTest is Test {
 
     function setUp() public {
         counter = new Counter();
-        counter.setNumber(0);
     }
 
-    function testIncrement() public {
+    function testincreament() public {
         counter.increment();
-        assertEq(counter.number(), 1);
+        assertEq(counter.number(),1);
     }
 
-    function testSetNumber(uint256 x) public {
-        counter.setNumber(x);
-        assertEq(counter.number(), x);
+    function testFail() public {
+        counter.decrement();
+
     }
+
+
+    function testDecunderflow() public {
+        vm.expectRevert(stdError.arithmeticError);
+        counter.decrement();
+
+    }
+
+    function testvariable() public {
+        assertEq(counter.number(),0);
+    }
+
+    function testDecrement() public {
+        counter.increment();
+        counter.increment();
+        counter.increment();
+        counter.decrement();
+        assertEq(counter.number(),2);
+
+    }
+
+
+
+
 }
