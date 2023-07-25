@@ -3,6 +3,7 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
 import "../src/Counter.sol";
+import "forge-std/console.sol";
 
 contract CounterTest is Test {
     Counter public counter;
@@ -13,23 +14,20 @@ contract CounterTest is Test {
 
     function testincreament() public {
         counter.increment();
-        assertEq(counter.number(),1);
+        assertEq(counter.number(), 1);
     }
 
     function testFail() public {
         counter.decrement();
-
     }
-
 
     function testDecunderflow() public {
         vm.expectRevert(stdError.arithmeticError);
         counter.decrement();
-
     }
 
     function testvariable() public {
-        assertEq(counter.number(),0);
+        assertEq(counter.number(), 0);
     }
 
     function testDecrement() public {
@@ -37,11 +35,6 @@ contract CounterTest is Test {
         counter.increment();
         counter.increment();
         counter.decrement();
-        assertEq(counter.number(),2);
-
+        assertEq(counter.number(), 2);
     }
-
-
-
-
 }
