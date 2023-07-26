@@ -10,10 +10,7 @@ import {Wallet} from "../src/Wallet.sol";
 // hoax(address,uint) --deal + prank. Sets up a prank and set balance
 
 contract WalletTest is Test {
-
-    
     Wallet public wallet;
-
 
     function setUp() public {
         wallet = new Wallet{value:1e18}();
@@ -22,7 +19,6 @@ contract WalletTest is Test {
     function sendEth(uint256 amount) public {
         (bool ok,) = address(wallet).call{value: amount}("");
         require(ok, "send eth failed");
-        
     }
 
     function testEthBalance() public {
@@ -30,7 +26,7 @@ contract WalletTest is Test {
     }
 
     function testsendEth() public {
-        uint bal = address(wallet).balance;
+        uint256 bal = address(wallet).balance;
         vm.deal(address(1), 100 ether);
         assertEq(address(1).balance, 100 ether);
 
@@ -38,12 +34,12 @@ contract WalletTest is Test {
         assertEq(address(1).balance, 10 ether);
 
         // hoax(address,uint) --deal + prank. Sets up a prank and set balance
-        deal(address(1),123);
+        deal(address(1), 123);
         vm.prank(address(1));
         sendEth(123);
 
         hoax(address(1), 456);
         sendEth(456);
-        assertEq(address(wallet).balance,bal + 123 + 456);
+        assertEq(address(wallet).balance, bal + 123 + 456);
     }
 }

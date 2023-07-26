@@ -58,7 +58,7 @@ This example is all about
 
 ### 12. Signature Testing 
 
-#### There are 4 steps to sign a message 
+##### There are 4 steps to sign a message 
 
 1. private key = 12345
 2. public key = vm.addr(private key) --(This will give the public key from the private key)
@@ -66,3 +66,37 @@ This example is all about
 4. messagehash = keccak256(message) -- (This will give the hash of the message which is any message)
 5. (uint8 v ,bytes32 r,bytes32 s) = vm.sign(privatekey,message hash) -- (This signature function will give the output which are v,r,s) 
 6. address signer = ecrecover(messagehash,v,r,s) -- (This is the verification function which is used to verify the signer)
+
+
+
+### 15. Mint 1 Million DAI  on the MainNet
+
+1. deal(address(dai), Alice , 1e6 * 1e18  ,true);   --->  This is the built in function in foundry to Mint tokens on any platform. This function takes 4 parameters 
+   1. address of the protocal that we are trying to mint
+   2. address of the person who is minting (Here we are minting with the alice address which is 123).
+   3. No of tokens Minting (Here the total tokens we are minting is 1 million which is equal to 1e6 and each token has 1e18 decimals so we multiply with 1e18)
+   4. Its suggests that wheather we want to increament  the total supply after minting the 1 million tokens
+
+
+
+### 16. Fuzz in foundry
+
+1. vm.assume(x > 0) --> It tells that the number that was given by foundry randomly will must be greater than than 0
+2. bound(input,min,max) --> This function will check that wheather the input is between the min and max or not
+
+3. stats are shown in the output they will give the details of the gas usage and number of random variables that are given as the input of the function.
+   
+
+
+
+### 17. Invariant Tests
+
+1. Testing contract is invariant_1.sol
+2. Testie contract is WETH.sol
+
+
+### 18. Invariant Tests  (Handler Based)
+
+
+
+
