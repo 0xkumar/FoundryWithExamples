@@ -16,13 +16,11 @@ contract Time is Test {
     function setUp() public {
         auction = new Auction();
         startAt = block.timestamp;
-
     }
-    
+
     function testBidFailsBeforeStartTime() public {
         vm.expectRevert(bytes("Auction not started yet"));
         auction.bid();
-        
     }
 
     function TestBid() public {
@@ -34,28 +32,23 @@ contract Time is Test {
         vm.warp(startAt + 2 days);
         vm.expectRevert(bytes("Auction not started yet"));
         auction.bid();
-        
     }
 
     function testTimeStamp() public {
-        uint t = block.timestamp;
-        //skip  -- increaments the time stamp 
+        uint256 t = block.timestamp;
+        //skip  -- increaments the time stamp
         skip(100);
         assertEq(block.timestamp, t + 100);
         //rewind -- decreaments the time stamp
 
         rewind(10);
         assertEq(block.timestamp, t + 90);
-
     }
 
     function testBlockNumber() public {
         //vm.roll -- set block number
-        uint   b = block.number;
+        uint256 b = block.number;
         vm.roll(999);
-        assertEq(block.number,999);
+        assertEq(block.number, 999);
     }
-
-     
-
 }

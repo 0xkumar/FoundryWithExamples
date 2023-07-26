@@ -86,7 +86,7 @@ contract EventTest is Test {
             //3. call the function that should emit the event
             vm.expectEmit(true, true, false, true);
             emit Transfer(address(this), to[i], amount[i]);
-            e.transferMany(address(this),to,amount);
+            e.transferMany(address(this), to, amount);
         }
     }
 }
